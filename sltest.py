@@ -1,5 +1,5 @@
+# based on DB-API (PEP 249)
 import sqlite3
-
 
 # connnect (and create `.db` file if it doesn't already exist)
 conn = sqlite3.connect('test.db')
@@ -13,15 +13,30 @@ c.execute("""
     (name text, price int, isbn text)
 """)
 
+# let's pretend this is user input we need to save
+books = [
+    {
+        'name': 'Origins of Political Order',
+        'price': 10.00,
+        'isbn': '0374533229',
+    },
+    {
+        'name': 'Political Order and Political Decay',
+        'price': 10.00,
+        'isbn': '0374535620',
+    }
+]
+
+# use question marks to validate input
 c.execute("""
     INSERT INTO book 
-    VALUES ('Inventing Japan', 10, '0812972864')
-""")
+    VALUES (?, ?, ?)
+""", (books[0]['name'], books[0]['price'], books[0]['isbn']))
 
 c.execute("""
     INSERT INTO book 
-    VALUES ('Origins of Political Order', 12, '0374533229')
-""")
+    VALUES (?, ?, ?)
+""", (books[0]['name'], books[0]['price'], books[0]['isbn']))
 
 # can't run `fetch` methods twice in a row
 # i.e. can't do `fetchone()` then `fetchall()`
