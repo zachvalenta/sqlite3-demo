@@ -1,5 +1,5 @@
 run:
-	python3 sltest.py
+	python3 sl.py
 
 rm:
 	rm *.db
