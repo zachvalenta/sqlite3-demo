@@ -38,11 +38,13 @@ c.execute("""
     VALUES (?, ?, ?)
 """, (books[0]['name'], books[0]['price'], books[0]['isbn']))
 
-# can't run `fetch` methods twice in a row
-# i.e. can't do `fetchone()` then `fetchall()`
-# once records have been fetched, they're unavailable to be fetched again
+# query db
 c.execute("""SELECT * FROM book""")
-print(c.fetchall())  # returns list of tuples
+
+# `fetch` provide DSL above straight SELECT
+# gotcha: can't run `fetch` functions consecutively
+# once records have been fetched, they're unavailable to be fetched again
+print(c.fetchall())
 
 # save transaction
 conn.commit()
