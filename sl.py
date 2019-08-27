@@ -2,6 +2,8 @@
 import sqlite3
 
 # connnect (and create `.db` file if it doesn't already exist)
+# can also do everything in memory
+# just pass `:memory:` as an argument instead
 conn = sqlite3.connect('test.db')
 
 # this allows us to run SQL
